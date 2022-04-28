@@ -1,6 +1,6 @@
 TARGET=demoBin
 
-SRC=remuxing.c
+SRC=decodeVideo.c
 
 CC=gcc
 

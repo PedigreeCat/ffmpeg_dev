@@ -1,5 +1,8 @@
-include/*
-lib/*
+include
+lib
 src/lib*/*
-src/out.*
-src/in.*
+src/*.yuv
+src/*.mp4
+src/*.flv
+src/demoBin
+.vscode
