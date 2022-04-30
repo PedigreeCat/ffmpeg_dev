@@ -8,7 +8,7 @@ CFLAGS=-I../include/
 
 LDFLAGS=-L../lib/
 
-LDFLAGS+=-lavutil -lavformat -lavcodec
+LDFLAGS+=-lavutil -lavformat -lavcodec -lswscale
 
 $(TARGET):$(SRC)
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
