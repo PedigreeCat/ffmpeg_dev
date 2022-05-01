@@ -21,15 +21,19 @@ int decodeVideo(AVCodecContext *codecCtx, AVPacket *packet, struct SwsContext *s
     {
         sws_scale(swsCtx, frame->data, frame->linesize, 0, codecCtx->height,
                     destFrame->data, destFrame->linesize);
-
+#if 0
+        // write data as YUV420P
         fwrite(destFrame->data[0], 1, destWidth * destHeight, dest_fp);
         fwrite(destFrame->data[1], 1, destWidth * destHeight / 4, dest_fp);
         fwrite(destFrame->data[2], 1, destWidth * destHeight / 4, dest_fp);
+#else
+        // write data as RGB24
+        fwrite(destFrame->data[0], 1, destWidth * destHeight * 3, dest_fp);
+#endif
         frameCount++;
-        // av_log(NULL, AV_LOG_INFO, "frameCount: %d\n", frameCount);
         av_log(NULL, AV_LOG_INFO,\
-            "linesize[0] = %d, linesize[1] = %d, linesize[2] = %d, width = %d, height = %d\n",\
-            destFrame->linesize[0], destFrame->linesize[1], destFrame->linesize[2], destWidth, destHeight);
+            "frameCount: %d, linesize[0] = %d, linesize[1] = %d, linesize[2] = %d, width = %d, height = %d\r",\
+            frameCount, destFrame->linesize[0], destFrame->linesize[1], destFrame->linesize[2], destWidth, destHeight);
     }
     if (frame)
     {
@@ -106,8 +110,8 @@ int main(int argc, char **argv)
         goto fail;
     }
 
-    enum AVPixelFormat destPixFmt = codecCtx->pix_fmt;
-    
+    // enum AVPixelFormat destPixFmt = codecCtx->pix_fmt;
+    enum AVPixelFormat destPixFmt = AV_PIX_FMT_RGB24;
     struct SwsContext *swsCtx = 
         sws_getContext(codecCtx->width, codecCtx->height, codecCtx->pix_fmt,
                         destWidth, destHeight, destPixFmt, SWS_FAST_BILINEAR, NULL, NULL, NULL);
@@ -150,6 +154,7 @@ int main(int argc, char **argv)
     decodeVideo(codecCtx, &packet, swsCtx, destWidth, destHeight, destFrame, dest_fp);
 
 fail:
+    av_log(NULL, AV_LOG_INFO, "\n");
     if (inFmtCtx)
     {
         avformat_close_input(&inFmtCtx);
