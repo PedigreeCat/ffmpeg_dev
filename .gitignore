@@ -9,3 +9,4 @@ src/demoBin
 src/*.rgb
 src/picture
 src/core*
+src/*.h264
