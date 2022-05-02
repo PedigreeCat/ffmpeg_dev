@@ -1,6 +1,6 @@
 TARGET=demoBin
 
-SRC=decodeVideo.c
+SRC=decodeVideo2Bmp.c
 
 CC=gcc
 
