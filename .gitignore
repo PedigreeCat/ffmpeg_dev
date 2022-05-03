@@ -10,3 +10,5 @@ src/*.rgb
 src/picture
 src/core*
 src/*.h264
+src/*.pcm
+src/*.aac
