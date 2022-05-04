@@ -139,6 +139,14 @@ end:
     {
         fclose(dest_fp);
     }
+    if (frame)
+    {
+        av_frame_free(&frame);
+    }
+    if (frameBuffer)
+    {
+        av_freep(frameBuffer);
+    }
 
     return ret;
 }

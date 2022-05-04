@@ -1,10 +1,11 @@
 TARGET=demoBin
 
-SRC=decodeAudioDemo.c
+SRC=encodeAudioDemo.c
 
 CC=gcc
 
 CFLAGS=-I../include/
+#CFLAGS+=-g
 
 LDFLAGS=-L../lib/
 

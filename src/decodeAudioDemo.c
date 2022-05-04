@@ -29,7 +29,7 @@ int decodeAudio(AVCodecContext *decoderCtx, AVPacket *packet, AVFrame *frame, FI
             av_log(NULL, AV_LOG_ERROR, "get bytes failed!\n");
             return -1;
         }
-        // frame    fltp    2
+        // frame    fltp    2   LC
         /**
          * data[0] L L L L
          * data[1] R R R R
@@ -126,7 +126,12 @@ int main(int argc, char **argv)
     {
         if (packet.stream_index == audioIndex)
         {
-            decodeAudio(decoderCtx, &packet, frame, dest_fp);
+            ret = decodeAudio(decoderCtx, &packet, frame, dest_fp);
+            if (ret != 0)
+            {
+                av_log(NULL, AV_LOG_ERROR, "decode audio failed!\n");
+                goto end;
+            }
         }
         av_packet_unref(&packet);
     }
