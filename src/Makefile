@@ -1,6 +1,6 @@
 TARGET=demoBin
 
-SRC=encodeAudioDemo.c
+SRC=captureVideo.c
 
 CC=gcc
 
@@ -9,7 +9,7 @@ CFLAGS=-I../include/
 
 LDFLAGS=-L../lib/
 
-LDFLAGS+=-lavutil -lavformat -lavcodec -lswscale
+LDFLAGS+=-lavutil -lavformat -lavcodec -lswscale -lavdevice -lSDL2
 
 $(TARGET):$(SRC)
 	$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
