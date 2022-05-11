@@ -1,6 +1,6 @@
 TARGET=demoBin
 
-SRC=captureVideo.c
+SRC=sdlPlayAudio.c
 
 CC=gcc
 

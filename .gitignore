@@ -10,3 +10,4 @@ src/core*
 src/*.h264
 src/*.pcm
 src/*.aac
+src/*.bmp
